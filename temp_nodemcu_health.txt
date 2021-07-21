@@ -6,7 +6,7 @@ int temp = A0;
 
 void callback(char* topic,byte* payload,unsigned int length1);
 
-const char* mqtt_server="test.mosquitto.org";//I use Mosquitto server but we can use diff
+const char* mqtt_server="";//I use Mosquitto server but we can use diff server
 WiFiClient espclient;
 PubSubClient client(mqtt_server,1883,callback,espclient);
 
@@ -15,7 +15,7 @@ void setup() {
   Serial.begin(115200);
   pinMode(temp,INPUT);
   Serial.print("connecting");
-  WiFi.begin("private","p@shubh");         //SSID,PASSWORD 
+  WiFi.begin("private","*******");         //SSID,PASSWORD 
   while(WiFi.status()!=WL_CONNECTED){
     delay(500);
     Serial.print(".");
@@ -68,7 +68,7 @@ void loop() {
     Serial.print(temperature);
     static char Temperature[7];
     dtostrf(temperature, 6, 2, Temperature);
-    client.publish("Temp",Temperature);
+    client.publish("Topic",Temperature);
    
     
     delay(3000);
